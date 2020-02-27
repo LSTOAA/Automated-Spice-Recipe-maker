@@ -1,12 +1,29 @@
+  
+/**
+ * @SpiceRecipes.ino
+ *
+ * Automated Spice Recipe maker using Arduino Uno which measures weight using a load cell and HX711 load cell amplifier
+ * Interfaced via Blynk using ESP8266 Node MCU WiFi module
+ * With sms feedback via GSM SIM900A module 
+ * For 2 recipes with 9 ingredients
+ * @version 1.0
+ * @date 15-01-2019
+ * @authors A. Sharma  and A. Saikia
+ * @copyright Copyright (c) 2019 LSTOAA
+ *
+ */
+
 #include <SoftwareSerial.h>
 
-SoftwareSerial mySerial(35, 36); //connect Tx of gsm to pin 9 of arduino
+SoftwareSerial mySerial(35, 36); 
+//connect Tx of gsm to pin 9 of arduino
 //connect Rx of gsm to pin 10 of arduino
 
 #inclclude "HX711.h"
 #define calibration_factor -7050 //This value is obtained using the SparkFun_HX711_Calibration sketch
 #define DOUT  12
 #define CLK 13
+
 HX711 scale(DOUT, CLK);
 
 void setup() {
@@ -57,8 +74,10 @@ void setup() {
 
 
 void loop() {
-  if (digitalRead(2) == HIGH) {            //1st Recipe
-    while ((scale.get_units() * 65.5) < 855) {     //weight for Cumin 145gm Hopper 1st recipe
+  /*1st Recipe*/
+  //Replace XXX with desired quantity (in grams)
+  if (digitalRead(2) == HIGH) {           
+    while ((scale.get_units() * 65.5) < XXX) {     //weight for Cumin XXXgm Hopper 1st recipe
       digitalWrite(24, LOW);
     }
     digitalWrite(24, HIGH);
@@ -67,7 +86,7 @@ void loop() {
     delay(500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 2450) {    //weight for garam masala 50gm Hopper 1st recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for garam masala xxxgm Hopper 1st recipe
       digitalWrite(26, LOW);
     }
     digitalWrite(26, HIGH);
@@ -76,7 +95,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 5840) {    //weight for Coriander 160gm Hopper 1st recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Coriander xxxgm Hopper 1st recipe
       digitalWrite(27, LOW);
     }
     digitalWrite(27, HIGH);
@@ -85,7 +104,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 600) {    //weight for DEGI 90gm Hopper 1st recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Degi mirch xxx gm Hopper 1st recipe
       digitalWrite(28, LOW);
     }
     digitalWrite(28, HIGH);
@@ -94,7 +113,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 3980) {    //weight for Mix Masala 20gm Hopper 1st recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Mix Masala xxxgm Hopper 1st recipe
       digitalWrite(29, LOW);
     }
     digitalWrite(29, HIGH);
@@ -103,7 +122,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 1780) {    //weight for Red Chili 220gm Hopper 1st recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Red Chili xxxgm Hopper 1st recipe
       digitalWrite(30, LOW);
     }
     digitalWrite(30, HIGH);
@@ -112,7 +131,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 375) {    //weight for Ajwain 125gm Hopper 1st recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Ajwain xxxgm Hopper 1st recipe
       digitalWrite(33, LOW);
     }
     digitalWrite(33, HIGH);
@@ -124,7 +143,7 @@ void loop() {
     float t = (a + c + d + e + f + g + j);
      mySerial.println("AT+CMGF=1");    //Sets the GSM Module in Text Mode
   delay(1000);  // Delay of 1000 milli seconds or 1 second
-  mySerial.println("AT+CMGS=\"+919873115778\"\r"); // Replace x with mobile number
+  mySerial.println("AT+CMGS=\"+91XXXXXXXXXX\"\r"); // Replace X with mobile number
   delay(1000);
   mySerial.print("Cumin=");
   mySerial.println(a);
@@ -147,7 +166,7 @@ void loop() {
   delay(12000);
   mySerial.println("AT+CMGF=1");    //Sets the GSM Module in Text Mode
   delay(1000);  // Delay of 1000 milli seconds or 1 second
-  mySerial.println("AT+CMGS=\"+919013009013\"\r"); // Replace x with mobile number
+  mySerial.println("AT+CMGS=\"+91XXXXXXXXXX\"\r"); // Replace X with mobile number
   delay(1000);
   mySerial.print("Cumin=");
   mySerial.println(a);
@@ -170,8 +189,9 @@ void loop() {
   delay(1000);
   }
 
-  else if (digitalRead(3) == HIGH) {            //2nd Recipe
-    while ((scale.get_units() * 65.5) < 855) {     //weight for Cumin 145gm Hopper 2nd recipe
+  /*2nd Recipe*/
+  else if (digitalRead(3) == HIGH) {
+    while ((scale.get_units() * 65.5) < xxx) {     //weight for Cumin xxxgm Hopper 2nd recipe
       digitalWrite(24, LOW);
     }
     digitalWrite(24, HIGH);
@@ -180,7 +200,7 @@ void loop() {
     delay(500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 0) {     //weight for salt 800gm Hopper 2nd recipe
+    while ((scale.get_units() * 65.5) < xxx) {     //weight for salt xxxgm Hopper 2nd recipe
       digitalWrite(25, LOW);
     }
     digitalWrite(25, HIGH);
@@ -189,7 +209,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 2450) {    //weight for garam masala 50gm Hopper 2nd recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for garam masala xxxgm Hopper 2nd recipe
       digitalWrite(26, LOW);
     }
     digitalWrite(26, HIGH);
@@ -198,7 +218,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 5840) {    //weight for Coriander 160gm Hopper 2nd recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Coriander xxxgm Hopper 2nd recipe
       digitalWrite(27, LOW);
     }
     digitalWrite(27, HIGH);
@@ -207,7 +227,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 640) {    //weight for DEGI 90gm Hopper 2nd recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Degi mirch xxxgm Hopper 2nd recipe
       digitalWrite(28, LOW);
     }
     digitalWrite(28, HIGH);
@@ -216,7 +236,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 3980) {    //weight for Mix Masala 20gm Hopper 2nd recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Mix Masala xxxgm Hopper 2nd recipe
       digitalWrite(29, LOW);
     }
     digitalWrite(29, HIGH);
@@ -225,7 +245,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 1780) {    //weight for Red Chili 220gm Hopper 2nd recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Red Chili xxxgm Hopper 2nd recipe
       digitalWrite(30, LOW);
     }
     digitalWrite(30, HIGH);
@@ -234,7 +254,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 0) {    //weight for Turmeric 20gm Hopper 2nd recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Turmeric xxxgm Hopper 2nd recipe
       digitalWrite(31, LOW);
     }
     digitalWrite(31, HIGH);
@@ -243,7 +263,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 0) {    //weight for Cashew 635gm Hopper 2nd recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Cashew xxxgm Hopper 2nd recipe
       digitalWrite(32, LOW);
     }
     digitalWrite(32, HIGH);
@@ -252,7 +272,7 @@ void loop() {
     delay(1500);
     scale.tare();
     delay(1500);
-    while ((scale.get_units() * 65.5) < 375) {    //weight for Ajwain 125gm Hopper 2nd recipe
+    while ((scale.get_units() * 65.5) < xxx) {    //weight for Ajwain xxxgm Hopper 2nd recipe
       digitalWrite(33, LOW);
     }
     digitalWrite(33, HIGH);
@@ -264,7 +284,7 @@ void loop() {
     float t = (a + b + c + d + e + f + g + h + i + j);
      mySerial.println("AT+CMGF=1");    //Sets the GSM Module in Text Mode
   delay(1000);  // Delay of 1000 milli seconds or 1 second
-  mySerial.println("AT+CMGS=\"+919873115778\"\r"); // Replace x with mobile number
+  mySerial.println("AT+CMGS=\"+91XXXXXXXXXX\"\r"); // Replace XXX with mobile number
   delay(1000);
   mySerial.print("Cumin=");
   mySerial.println(a);
@@ -293,7 +313,7 @@ void loop() {
   delay(12000);
   mySerial.println("AT+CMGF=1");    //Sets the GSM Module in Text Mode
   delay(1000);  // Delay of 1000 milli seconds or 1 second
-  mySerial.println("AT+CMGS=\"+919013009013\"\r"); // Replace x with mobile number
+  mySerial.println("AT+CMGS=\"+91XXXXXXXXXX\"\r"); // Replace X with mobile number
   delay(1000);
   mySerial.print("Cumin=");
   mySerial.println(a);
